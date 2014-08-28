@@ -11,8 +11,9 @@ To install the excel.link package, go the the tools menu from within RStudio, se
 Files
 =====
 
-write1_read1.R - this writes data from R to one cell of the simple Excel model and reads one cell back from Excel to R
-ReadAndWriteRanges.R - this writes data from an R dataframe into a named rangle of the simple Excel model where the example models inputs are stored.  It then reads the updated results, held within another named range in the from Excel model, back to R.
+*write1_read1.R* - this writes data from R to one cell of the simple Excel model and reads one cell back from Excel to R
+
+*ReadAndWriteRanges.R* - this writes data from an R dataframe into a named rangle of the simple Excel model where the example models inputs are stored.  It then reads the updated results, held within another named range in the from Excel model, back to R.
 
 
 Next Steps
@@ -20,8 +21,11 @@ Next Steps
 
 
 Construct data frames in R that mimic Calculator pathways
+
 Programaatically generate/manipualte the pathway dataframes
+
 Create dataframe to which results from different pathways can be appended
+
 Create charts that show the variation in results between the differnet pathways
 
 
