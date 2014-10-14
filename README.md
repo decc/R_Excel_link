@@ -15,6 +15,9 @@ Files
 
 *ReadAndWriteRanges.R* - this writes data from an R dataframe into a named rangle of the simple Excel model where the example models inputs are stored.  It then reads the updated results, held within another named range in the from Excel model, back to R.
 
+*MonteCarlo.R* - this performs a Monte Carlo analysis one a using values within a simple Excel model (SimpleModel.xlsx)
+
+
 
 Next Steps
 ==========
@@ -38,3 +41,6 @@ http://cran.r-project.org/web/packages/excel.link/index.html
 cran.r-project.org/web/packages/excel.link/excel.link.pdf
 
 
+Aknowledgements
+===============
+The monte carlo analysis R code used here is borrowed from http://johnpurchase.com/monte-carlo-with-R.html
