@@ -3,27 +3,27 @@ ndvar(1000000)
 conc <- 10
 cook <- mcstoc(rempiricalD, values=c(1,1/5,1/50), prob=c(0.25, 0.25, 0.50))
 serving <- mcstoc(rgamma, shape=3.93, rate=0.0806)
+cookserve <- cbind(cook, serving)
 
-#new line added here - does this work? try with a higher correlation. doesn't work- see V2
-#cornode(cook, serving, target=0.99, result=TRUE)
+cookserveCOR <- cornode(cookserve, target=0.99, result=TRUE)
 
-expo <- conc * cook * serving
+cookCOR <- mcdata(cookserveCOR[,1])
+servingCOR <- mcdata(cookserveCOR[,2])
+
+expo <- conc * cookserveCOR[,1] * cookserveCOR[,2]
+
+expoMC <-mcdata(expo)
+
 dose <- mcstoc(rpois,lambda=expo)
 r <- 0.001
 risk <- 1-(1-r)^dose
-EC1 <- mc(cook,serving,expo,dose,risk)
+
+
+
+EC1 <- mc(cookCOR,servingCOR,expoMC,dose,risk)
 print (EC1)
 summary(EC1)
 
-#Correlated input variables
-serving <- serving/183
-plot(cook, serving)
-
-plot(cook, serving)
-plot(serving)
-cornode(cook, serving, target=0.5, result=TRUE)
-#make some plots/summaries of cook and serving before and after running this to compare.
-#Does this make new versions of these variable that are correleated?
 
 
 #Greg's plot
