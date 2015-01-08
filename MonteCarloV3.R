@@ -6,6 +6,8 @@ setwd("C:/Users/DECC/Documents/Github/R_Excel_link/")#sets the working directory
 library(excel.link) #loads the excel.link extension library (the first time need to go to Tools, 
 #Install Packages, and type 'excel.link' in the install wizard 'Packages' field, and install)
 
+library(mc2d) #loads the mc2d two dimensional monte carlo extension package
+
 xl.workbook.open("SimpleModel.xlsx") #opens a specific Excel file
 
 xl.sheet.activate("mc_model") #activates the desired worksheet in the Excel model
@@ -28,6 +30,17 @@ production = monteSim(xl[c7],xl[d7])
 
 #add in a grid of plots to show these?
 
+#assume a correlation between material costs and the level of production
+
+matprod <-cbind(material, production)
+plot(matprod) #a plot of the new matrix
+
+matprodcor <- cornode(matprod, target = 0.75, result=TRUE)
+
+
+
+
+
 
 #****create the posterior distribution
 posterior.distribution = NULL #set up an empty vector to store the posterior distribution
@@ -41,8 +54,8 @@ for (i in 1:length(maintenance)){
   
   xl[f4] = maintenance[i]
   xl[f5] = labour[i]
-  xl[f6] = material[i]
-  xl[f7] = production[i]
+  xl[f6] = matprodcor[i,1]
+  xl[f7] = matprodcor[i,2]
   
   
   #refresh model to calc result? is this necessary - couldn't easily find a command to do this
