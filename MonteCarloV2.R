@@ -26,7 +26,35 @@ labour = monteSim(xl[c5],xl[d5])
 material = monteSim(xl[c6],xl[d6])
 production = monteSim(xl[c7],xl[d7])
 
-result = (maintenance + labour + material) * production
+#add in a grid of plots to show these?
+
+
+#****create the posterior distribution
+posterior.distribution = NULL #set up an empty vector to store the posterior distribution
+
+
+for (i in 1:length(maintenance)){
+  
+  
+  #enter the input assumptions from the distribution vectors
+  
+  
+  xl[f4] = maintenance[i]
+  xl[f5] = labour[i]
+  xl[f6] = material[i]
+  xl[f7] = production[i]
+  
+  
+  #refresh model to calc result? is this necessary - couldn't easily find a command to do this
+  
+  posterior.distribution[i] = xl[f10] #add result to vector
+}
+
+
+
+#result = (maintenance + labour + material) * production  #this is old - ignore
+hist(posterior.distribution)
+
 
 #plot the results
 threshold <- function(v, t, low.col="red", high.col="green") {
@@ -48,4 +76,4 @@ threshold <- function(v, t, low.col="red", high.col="green") {
   legend(min(d$x) ,max(d$y), labels, fill=c(low.col, high.col))
 }
 
-threshold(result, 400000)
+threshold(posterior.distribution, 400000)  #will need to turn result to posterior distribution
