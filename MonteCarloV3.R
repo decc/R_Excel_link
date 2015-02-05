@@ -14,7 +14,7 @@ xl.sheet.activate("mc_model") #activates the desired worksheet in the Excel mode
 
 
 #a function for performing montecarlo analysis
-monteSim <- function(low, high, ci=0.9, n=100){
+monteSim <- function(low, high, ci=0.9, n=1000){
   mu = mean(c(low,high))
   z = qnorm(1-(1-ci)/2)
   s = (high - mu)/z
@@ -35,8 +35,8 @@ production = monteSim(xl[c7],xl[d7])
 matprod <-cbind(material, production)
 plot(matprod) #a plot of the new matrix
 
-matprodcor <- cornode(matprod, target = 0.75, result=TRUE)
-
+matprodcor <- cornode(matprod, target = -0.75, result=TRUE)
+plot(matprodcor)
 
 
 
@@ -49,16 +49,12 @@ posterior.distribution = NULL #set up an empty vector to store the posterior dis
 for (i in 1:length(maintenance)){
   
   
-  #enter the input assumptions from the distribution vectors
-  
+  #enter the input assumptions from the distribution vectors  
   
   xl[f4] = maintenance[i]
   xl[f5] = labour[i]
   xl[f6] = matprodcor[i,1]
   xl[f7] = matprodcor[i,2]
-  
-  
-  #refresh model to calc result? is this necessary - couldn't easily find a command to do this
   
   posterior.distribution[i] = xl[f10] #add result to vector
 }

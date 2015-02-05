@@ -52,7 +52,7 @@ for (i in 1:length(maintenance)){
 
 
 
-#result = (maintenance + labour + material) * production  #this is old - ignore
+
 hist(posterior.distribution)
 
 

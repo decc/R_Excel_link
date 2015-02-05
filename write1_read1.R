@@ -3,7 +3,7 @@
 library(excel.link) #loads the excel.link extension library (the first time need to go to Tools, 
 #Install Packages, and type 'excel.link' in the install wizard 'Packages' field, and install)
 
-setwd("C:/Users/DECC/Documents/R_Greg/Excel_link_to_R/")#sets the working directory to where the Excel
+setwd("C:/Users/DECC/Documents/Github/R_Excel_link/")#sets the working directory to where the Excel
 #model is located
 
 xl.workbook.open("SimpleModel.xlsx") #opens a specific Excel file
