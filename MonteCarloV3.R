@@ -14,21 +14,21 @@ xl.sheet.activate("mc_model") #activates the desired worksheet in the Excel mode
 
 
 #a function for performing montecarlo analysis
-monteSim <- function(low, high, ci=0.9, n=1000){
+monteSim <- function(low, high, conf_int=0.9, n=200){
   mu = mean(c(low,high))
-  z = qnorm(1-(1-ci)/2)
+  z = qnorm(1-(1-conf_int)/2)
   s = (high - mu)/z
   rnorm(n, mu, s)
 }
 
 
 #use the monteSim function to generate the vectors required for the problem
-maintenance = monteSim(xl[c4],xl[d4])
-labour = monteSim(xl[c5],xl[d5])
-material = monteSim(xl[c6],xl[d6])
-production = monteSim(xl[c7],xl[d7])
+maintenance = monteSim(xl[e5],xl[f5])
+labour = monteSim(xl[e6],xl[f6])
+material = monteSim(xl[e7],xl[f7])
+production = monteSim(xl[e9],xl[f9])
 
-#add in a grid of plots to show these?
+
 
 #assume a correlation between material costs and the level of production
 
@@ -51,12 +51,12 @@ for (i in 1:length(maintenance)){
   
   #enter the input assumptions from the distribution vectors  
   
-  xl[f4] = maintenance[i]
-  xl[f5] = labour[i]
-  xl[f6] = matprodcor[i,1]
-  xl[f7] = matprodcor[i,2]
+  xl[h5] = maintenance[i]
+  xl[h6] = labour[i]
+  xl[h7] = matprodcor[i,1]
+  xl[h9] = matprodcor[i,2]
   
-  posterior.distribution[i] = xl[f10] #add result to vector
+  posterior.distribution[i] = xl[i11] #add result to vector
 }
 
 
@@ -66,6 +66,8 @@ hist(posterior.distribution)
 
 
 #plot the results
+
+
 threshold <- function(v, t, low.col="red", high.col="green") {
   d = density(v)
   l = length(d$x)
@@ -86,3 +88,5 @@ threshold <- function(v, t, low.col="red", high.col="green") {
 }
 
 threshold(posterior.distribution, 400000)
+
+
